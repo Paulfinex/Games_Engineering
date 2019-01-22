@@ -20,9 +20,9 @@ void Load() {
 	if (!spritesheet.loadFromFile("res/img/invaders_sheet.png")) {
 	cerr << "Failed to load spritesheet!" << std::endl;
 	}
-	invader.setTexture(spritesheet);
+	//invader.setTexture(spritesheet);
 	Invader* inv = new Invader(sf::IntRect(0, 0, 32, 32), { 100,100 });
-	//ships.push_back(inv);
+	ships.push_back(inv);
 }
 
 
@@ -45,7 +45,7 @@ void Update(RenderWindow &window) {
 
 void Render(RenderWindow &window) {
 	// Draw Everything
-    window.draw(invader);
+   // window.draw(invader);
 	for (const auto s : ships) {
 		window.draw(*s);
 	}
