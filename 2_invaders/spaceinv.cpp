@@ -2,6 +2,7 @@
 #include <iostream>
 #include "ship.h"
 #include "spaceinv.h"
+#include "bullet.h"
 
 //...
 
@@ -9,11 +10,12 @@ using namespace sf;
 using namespace std;
 std::vector<Ship *> ships;
 Player* player = new Player();
+Bullet* bullet = new Bullet(IntRect(64, 32, 32, 32));
 
-const Keyboard::Key controls[2] = {
-	Keyboard::A,   
-	Keyboard::D
-
+const Keyboard::Key controls[3] = {
+	Keyboard::A,
+	Keyboard::D,
+	Keyboard::Space
 };
 
 sf::Texture spritesheet;
@@ -59,6 +61,9 @@ void Update(RenderWindow &window) {
 	if (Keyboard::isKeyPressed(controls[1])) {
 		player->direction = 1.0f;
 	}
+	if (Keyboard::isKeyPressed(controls[2])) {
+		bullet->Fire(player->getPosition, false);
+	}
 
 	player->Update(dt);
 	player->direction = 0.0f;
@@ -74,6 +79,7 @@ void Render(RenderWindow &window) {
 	for (const auto s : ships) {
 		window.draw(*s);
 	}
+	
 	window.draw(*player);
 }
 
@@ -84,6 +90,7 @@ int main() {
 		window.clear();
 		Update(window);
 		Render(window);
+		bullet->Render(window);
 		window.display();
 	}
 	return 0;
