@@ -1,28 +1,41 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "ship.h"
+#include "spaceinv.h"
+
 //...
 
 using namespace sf;
 using namespace std;
 std::vector<Ship *> ships;
+Player* player = new Player();
+
 const Keyboard::Key controls[2] = {
-	Keyboard::Left,   
-	Keyboard::Right
+	Keyboard::A,   
+	Keyboard::D
 
 };
 
 sf::Texture spritesheet;
 sf::Sprite invader;
-const int gameWidth = 800;
-const int gameHeight = 600;
 void Load() {
 	if (!spritesheet.loadFromFile("res/img/invaders_sheet.png")) {
-	cerr << "Failed to load spritesheet!" << std::endl;
+		cerr << "Failed to load spritesheet!" << std::endl;
 	}
 	//invader.setTexture(spritesheet);
-	Invader* inv = new Invader(sf::IntRect(0, 0, 32, 32), { 100,100 });
-	ships.push_back(inv);
+	for (int r = 0; r < invaders_columns; ++r) {
+		auto rect = IntRect(0, 0, 32, 32);
+		for (int c = 0; c < invaders_rows; ++c) {
+			Vector2f position = { 100 + ((float)r * 40) , 100 + ((float)c * 40) };
+			auto inv = new Invader(rect, position);
+			inv->speed = 30;
+			inv->direction = 1.0f;
+			ships.push_back(inv);
+		}
+	}
+
+	player->speed = 40;
+	//ships.push_back(player);
 }
 
 
@@ -38,6 +51,17 @@ void Update(RenderWindow &window) {
 			return;
 		}
 	}
+
+
+	if (Keyboard::isKeyPressed(controls[0])) {
+		player->direction = -1.0f;
+	}
+	if (Keyboard::isKeyPressed(controls[1])) {
+		player->direction = 1.0f;
+	}
+
+	player->Update(dt);
+	player->direction = 0.0f;
 	for (auto &s : ships) {
 		s->Update(dt);
 	};
@@ -46,13 +70,15 @@ void Update(RenderWindow &window) {
 void Render(RenderWindow &window) {
 	// Draw Everything
    // window.draw(invader);
+	//window.draw(player);
 	for (const auto s : ships) {
 		window.draw(*s);
 	}
+	window.draw(*player);
 }
 
 int main() {
-	RenderWindow window(VideoMode(gameWidth, gameHeight), "PONG");
+	RenderWindow window(VideoMode(gameWidth, gameHeight), "Space Invaders");
 	Load();
 	while (window.isOpen()) {
 		window.clear();
