@@ -10,7 +10,6 @@ using namespace sf;
 using namespace std;
 std::vector<Ship *> ships;
 Player* player = new Player();
-Bullet* bullet = new Bullet(IntRect(64, 32, 32, 32));
 
 const Keyboard::Key controls[3] = {
 	Keyboard::A,
@@ -62,7 +61,7 @@ void Update(RenderWindow &window) {
 		player->direction = 1.0f;
 	}
 	if (Keyboard::isKeyPressed(controls[2])) {
-		bullet->Fire(player->getPosition, false);
+	//	bullet->Fire(player->getPosition, false);
 	}
 
 	player->Update(dt);
@@ -90,7 +89,7 @@ int main() {
 		window.clear();
 		Update(window);
 		Render(window);
-		bullet->Render(window);
+		//bullet->Render(window);
 		window.display();
 	}
 	return 0;
