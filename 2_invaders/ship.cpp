@@ -1,7 +1,7 @@
 //ship.cpp
 #include "ship.h"
 #include "spaceinv.h"
-#include "bullet.h"
+
 using namespace sf;
 using namespace std;
 
@@ -52,7 +52,6 @@ Player::Player() : Ship(IntRect(160, 32, 32, 32)) {
 
 void Player::Update(const float &dt) {
 	Ship::Update(dt);
-
 	move(dt * direction * speed,0);
 }
 void Ship::Explode() {

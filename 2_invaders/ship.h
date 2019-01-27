@@ -1,7 +1,7 @@
 //ship.h
 #pragma once
 #include <SFML/Graphics.hpp>
-
+#include "bullet.h"
 
 class Ship : public sf::Sprite {
 protected:

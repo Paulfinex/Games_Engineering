@@ -10,7 +10,7 @@ using namespace sf;
 using namespace std;
 std::vector<Ship *> ships;
 Player* player = new Player();
-
+static Vector2f plPos;
 const Keyboard::Key controls[3] = {
 	Keyboard::A,
 	Keyboard::D,
@@ -61,7 +61,7 @@ void Update(RenderWindow &window) {
 		player->direction = 1.0f;
 	}
 	if (Keyboard::isKeyPressed(controls[2])) {
-	//	bullet->Fire(player->getPosition, false);
+		Bullet::Fire(player->getPosition(), false);
 	}
 
 	player->Update(dt);
@@ -69,6 +69,8 @@ void Update(RenderWindow &window) {
 	for (auto &s : ships) {
 		s->Update(dt);
 	};
+	
+
 }
 
 void Render(RenderWindow &window) {
@@ -78,7 +80,7 @@ void Render(RenderWindow &window) {
 	for (const auto s : ships) {
 		window.draw(*s);
 	}
-	
+	Bullet::Render(window);
 	window.draw(*player);
 }
 
