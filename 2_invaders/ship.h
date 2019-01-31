@@ -16,7 +16,7 @@ public:
     virtual ~Ship() = 0;
     //Update, virtual so can be overrided, but not pure virtual
     virtual void Update(const float &dt);
-	bool is_exploded() const;
+	bool is_exploded() ;
 	virtual void Explode();
 };
 class Invader : public Ship {

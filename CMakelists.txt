@@ -31,3 +31,9 @@ add_custom_target(copy_resources ALL COMMAND ${CMAKE_COMMAND}
     ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/$<CONFIGURATION>/res
 )
  add_dependencies(2_INVADERS copy_resources)
+
+## Maze
+file(GLOB_RECURSE SOURCES maze/*.cpp maze/*.h)
+add_executable(MAZE ${SOURCES} )
+target_include_directories(MAZE SYSTEM PRIVATE ${SFML_INCS})
+target_link_libraries(MAZE sfml-graphics)

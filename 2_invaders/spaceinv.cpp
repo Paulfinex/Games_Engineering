@@ -69,7 +69,7 @@ void Update(RenderWindow &window) {
 	for (auto &s : ships) {
 		s->Update(dt);
 	};
-	
+	Bullet::Update(dt);
 
 }
 
@@ -80,8 +80,8 @@ void Render(RenderWindow &window) {
 	for (const auto s : ships) {
 		window.draw(*s);
 	}
-	Bullet::Render(window);
 	window.draw(*player);
+	Bullet::Render(window);
 }
 
 int main() {

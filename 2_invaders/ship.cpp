@@ -43,6 +43,12 @@ void Invader::Update(const float &dt) {
 			ships[i]->move(0, 24);
 		}
 	}
+	static float firetime = 0.0f;
+	firetime -= dt;
+	if (firetime <= 0 && rand() % 100 == 0) {
+		Bullet::Fire(getPosition(), true);
+		firetime = 4.0f + (rand() % 60);
+	}
 }
 
 
@@ -57,4 +63,8 @@ void Player::Update(const float &dt) {
 void Ship::Explode() {
     setTextureRect(IntRect(128, 32, 32, 32));
     _exploded = true;
+}
+bool Ship::is_exploded() 
+{
+	return this->_exploded;
 }
