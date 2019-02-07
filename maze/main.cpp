@@ -2,6 +2,7 @@
 #include <iostream>
 #include "player.h"
 #include "entity.h"
+#include "LevelSystem.h"
 
 //...
 
@@ -14,6 +15,7 @@ static Vector2f plPos;
 
 
 void Load() {
+	//ls::loadLevelFile("res/maps/maze_2.txt", 10.0f);
 
 }
 
@@ -38,7 +40,7 @@ void Update(RenderWindow &window) {
 	//	player->direction = 1.0f;
 	//}
 	//if (Keyboard::isKeyPressed(controls[2])) {
-	//	Bullet::Fire(player->getPosition(), false);
+	//	Bullet::Fire(player->getPositio(), false);
 	//}
 
 	//player->Update(dt);
@@ -54,6 +56,7 @@ void Render(RenderWindow &window) {
 	// Draw Everything
    // window.draw(invader);
 	player->render(window);
+	ls::render(window);
 	//for (const auto s : ships) {
 	//	window.draw(*s);
 	//}
