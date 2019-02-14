@@ -15,8 +15,9 @@ static Vector2f plPos;
 
 
 void Load() {
-	//ls::loadLevelFile("res/maps/maze_2.txt", 10.0f);
-
+	ls::loadLevelFile("res/maps/maze_2.txt", 100.0f);
+	Vector2f temp = { 50.0f, 50.0f };
+	player->setPosition(ls::getTilePosition({ 1,1 }) + temp );
 }
 
 

@@ -25,8 +25,13 @@ void Player::update(double dt) {
 	if (Keyboard::isKeyPressed(controls[3])) {
 		x++;
 	}
-	Vector2f pos = {(float)dt*_speed*x  , (float)dt*_speed*y};
-	move(pos);
+	Vector2f pos = { (float)dt*_speed*x  , (float)dt*_speed*y };
+
+	if (validMove(pos))
+	{
+		move(pos);
+	}
+
   Entity::update(dt);
 }
 
@@ -38,4 +43,18 @@ Player::Player()
 
 void Player::render(sf::RenderWindow &window) const {
   window.draw(*_shape);
+}
+
+
+bool Player::validMove(Vector2f pos)
+{
+	Vector2f pls = { 0.0f, 30.0f };
+	Vector2f posTo = (this->getPosition() + pls );
+	Vector2f temp;
+	temp = { 25.0f,25.0f };
+	if ((ls::getTileAt(posTo + temp + pos) != ls::WALL)&& (ls::getTileAt(posTo - temp + pos) != ls::WALL))
+		return true;
+
+	return false;
+	
 }

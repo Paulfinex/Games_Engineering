@@ -77,6 +77,7 @@ void LevelSystem::loadLevelFile(const std::string& path, float tileSize) {
 			cout << c << endl; // Don't know what this tile type is
 		}
 	}
+	h++; // increment height
 	if (temp_tiles.size() != (w * h)) {
 		throw string("Can't parse level file") + path;
 	}
